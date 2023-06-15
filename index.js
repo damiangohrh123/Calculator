@@ -26,7 +26,8 @@ operatorButtons.forEach((button) => {
     if (operator !== '') {
       calculate();
     }
-    handleOperator(e);
+    let key = e.target.textContent;
+    handleOperator(key);
   })
 });
 
@@ -41,6 +42,9 @@ deleteButton.addEventListener('click', handleDelete,);
 decimalButton.addEventListener('click', handleDecimal);
 percentageButton.addEventListener('click', handlePercentage);
 
+//Adding Eventlisteners for keyboard inputs
+window.addEventListener('keydown', handleKeyboardInput);
+
 //Input numbers onto the screen element
 function handleNumber(e) {
     if (currentValue.length < 8) {
@@ -50,9 +54,43 @@ function handleNumber(e) {
     }
 }
 
+//Keyboard Input
+function handleKeyboardInput(e) {
+  if (e.key === 'Backspace') {
+    handleDelete();
+  }
+  if (e.key === 'Escape') {
+    handleClear();
+  }
+  if ((e.key === '=' || e.key === 'Enter') && (currentValue !== '' && previousValue !== '' & operator !== '' )) {
+    calculate();
+  }
+  if (e.key === '+' || e.key === '-' || e.key === 'x' || e.key === '/') {
+    convertedKey = keyConverter(e.key);
+    if (operator != '') {
+      calculate();
+    }
+    handleOperator(convertedKey);
+  }
+  if (currentValue.length < 8) {
+    if (e.key >= 0 && e.key <=9) {
+      currentValue += e.key;
+      currentScreen.textContent = currentValue;
+    }
+  }
+}
+
+//Keyboard Input converter
+function keyConverter(keyInput) {
+  if (keyInput === '+') return '+';
+  if (keyInput === '-') return '-';
+  if (keyInput === 'x') return 'x';
+  if (keyInput === '/' ) return '÷';
+}
+
 //Operators function
 function handleOperator(e) {
-  operator = e.target.textContent;
+  operator = e;
   previousValue = currentValue;
   currentValue = '';
   previousScreen.textContent = `${previousValue} ${operator}`;

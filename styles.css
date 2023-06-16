@@ -1,36 +1,41 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
+body,
+.calculator,
+.screen {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
   justify-content: center;
   align-items: center;
+
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 
 .calculator {
-  background-color: rgb(153, 153, 153);
-  display: flex;
-  flex-direction: column;
   align-items: center;
+
   width: 400px;
-  border: 2px solid rgb(58, 58, 58);
+  margin: 100px 0 0 0px;
   border-radius: 15px;
   padding: 20px;
   gap: 20px;
-  margin: 100px 0 0 0px;
+  background-color: rgb(153, 153, 153);
+  border: 2px solid rgb(58, 58, 58);
 }
 
 .screen {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 10px;
+  word-break: break-all;
+
   width: 100%;
   height: 150px;
+  padding: 10px;
   border-radius: 5px;
   font-size: 60px;
   border: 2px solid rgb(58, 58, 58);
@@ -48,37 +53,40 @@ body {
 }
 
 .btnGrid {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
+
+  width: 100%;
 }
 
 .btn {
-  font-size: 20px;
   height: 70px;
   border-radius: 5px;
+
+  font-size: 20px;
   border: 2px solid rgb(58, 58, 58);
 }
 
-.btn-operators {
+.btnOperators {
   background-color: rgb(255, 162, 40);
 }
 
-.btn-top {
+.btnTop {
   color: rgb(255, 255, 255);
   background-color: rgb(97, 97, 97);
 }
 
-.btn-zero {
+.btnZero {
   grid-column: span 2;
 }
 
+/* Button Hover */
 .btn:hover {
   cursor: pointer;
 }
 
-.btn-top:hover {
+.btnTop:hover {
   background-color: rgb(70, 70, 70);
 }
   
@@ -86,7 +94,7 @@ body {
   background-color: rgb(184, 184, 184);
 }
 
-.btn-operators:hover {
+.btnOperators:hover {
   background-color: rgb(230, 125, 28);
 }
 
@@ -94,12 +102,29 @@ body {
     background-color: rgb(184, 184, 184);
 }
 
+/* Button click */
+.btnTop:active {
+  background-color: rgb(36, 36, 36);
+}
+  
+.btn#number:active {
+  background-color: rgb(145, 145, 145);
+}
+
+.btnOperators:active {
+  background-color: rgb(206, 110, 21);
+}
+
+.btn#decimal:active {
+  background-color: rgb(151, 151, 151);
+}
+
 .footer {
-  font-size: 20px;
   height: 25px;
+  width: auto;
   margin: auto 0 10px 0;
   padding: 5px 0 0 0;;
-  width: auto;
+  font-size: 20px;
 }
 
 #gh-logo {

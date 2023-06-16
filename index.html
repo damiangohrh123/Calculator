@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
-    <script src="./index.js" defer></script>
-    <title>Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <audio id="buttonClickSound" src="./sounds/buttonClickSound.wav"></audio>
+  <script src="./index.js" defer></script>
+  <title>Calculator</title>
 </head>
 <body>
-    <div class="calculator">
-        <div class="screen">
-            <div class="previousScreen">
-                
-            </div>
-            <div class="currentScreen">
-                0
-            </div>
-        </div>
-        <div class="btnGrid">
-            <button class="btn btn-top" id="clear" onclick="this.blur();">CLEAR</button>
-            <button class="btn btn-top" id="percentage" onclick="this.blur();">%</button>
-            <button class="btn btn-top" id="delete" onclick="this.blur();">DEL</button>
-            <button class="btn btn-operators" id="operator" onclick="this.blur();">÷</button>
-
-            <button class="btn" id="number" onclick="this.blur();">7</button>
-            <button class="btn" id="number" onclick="this.blur();">8</button>
-            <button class="btn" id="number" onclick="this.blur();">9</button>
-            <button class="btn btn-operators" id="operator" onclick="this.blur();">x</button>
-
-            <button class="btn" id="number" onclick="this.blur();">4</button>
-            <button class="btn" id="number" onclick="this.blur();">5</button>
-            <button class="btn" id="number" onclick="this.blur();">6</button>
-            <button class="btn btn-operators" id="operator" onclick="this.blur();">-</button>
-            
-            <button class="btn" id="number" onclick="this.blur();">1</button>
-            <button class="btn" id="number" onclick="this.blur();">2</button>
-            <button class="btn" id="number" onclick="this.blur();">3</button>
-            <button class="btn btn-operators" id="operator" onclick="this.blur();">+</button>
-
-            <button class="btn btn-zero" id="number" onclick="this.blur();">0</button>
-            <button class="btn" id="decimal" onclick="this.blur();">.</button>
-            <button class="btn btn-operators" id="equal" onclick="this.blur();">=</button>
-        </div>
+  <div class="calculator">
+    <div class="screen">
+      <div class="previousScreen"></div>
+      <div class="currentScreen">0</div>
     </div>
+    <div class="btnGrid">
+    <button class="btn btnTop" id="clear" onclick="this.blur();">CLEAR</button>
+    <button class="btn btnTop" id="percentage" onclick="this.blur();">%</button>
+    <button class="btn btnTop" id="delete" onclick="this.blur();">DEL</button>
+    <button class="btn btnOperators" id="operator" onclick="this.blur();">÷</button>
+
+    <button class="btn" id="number" onclick="this.blur();">7</button>
+    <button class="btn" id="number" onclick="this.blur();">8</button>
+    <button class="btn" id="number" onclick="this.blur();">9</button>
+    <button class="btn btnOperators" id="operator" onclick="this.blur();">x</button>
+
+    <button class="btn" id="number" onclick="this.blur();">4</button>
+    <button class="btn" id="number" onclick="this.blur();">5</button>
+    <button class="btn" id="number" onclick="this.blur();">6</button>
+    <button class="btn btnOperators" id="operator" onclick="this.blur();">-</button>
+    
+    <button class="btn" id="number" onclick="this.blur();">1</button>
+    <button class="btn" id="number" onclick="this.blur();">2</button>
+    <button class="btn" id="number" onclick="this.blur();">3</button>
+    <button class="btn btnOperators" id="operator" onclick="this.blur();">+</button>
+
+    <button class="btn btnZero" id="number" onclick="this.blur();">0</button>
+    <button class="btn" id="decimal" onclick="this.blur();">.</button>
+    <button class="btn btnOperators" id="equal" onclick="this.blur();">=</button>
+    </div>
+  </div>
     <div class="footer">
-        Made by: <a href=https://github.com/damiangohrh123> <img id="gh-logo" src="./images/githublogo.png" alt="github logo"/> damiangohrh123</a>
+      Made by: <a href=https://github.com/damiangohrh123> <img id="gh-logo" src="./images/githublogo.png" alt="github logo"/> damiangohrh123</a>
     </div>
 </body>
 </html>

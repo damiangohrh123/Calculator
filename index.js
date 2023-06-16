@@ -9,20 +9,24 @@ const deleteButton = btnGrid.querySelector('#delete');
 const decimalButton = btnGrid.querySelector('#decimal');
 const numberButtons = btnGrid.querySelectorAll('#number');
 const percentageButton = btnGrid.querySelector('#percentage')
+const buttonClickSound = document.querySelector('#buttonClickSound');
 
 //Declaring variables
 let operator = '';
-let currentValue = '';
+let currentValue = '0';
 let previousValue = '';
 
 //Adding Eventlisteners to each number button
 for (let i = 0; i < numberButtons.length; i++) {
-  numberButtons[i].addEventListener('click', handleNumber);
+  numberButtons[i].addEventListener('click', (e) => {
+    let num = e.target.textContent;
+    handleNumber(num);
+  });
 }
 
 //Adding Eventlisteners to buttons
 operatorButtons.forEach((button) => {
-  button.addEventListener('click', function(e) {
+  button.addEventListener('click', (e) => {
     if (operator !== '') {
       calculate();
     }
@@ -31,14 +35,14 @@ operatorButtons.forEach((button) => {
   })
 });
 
-equalButton.addEventListener('click', function() {
+equalButton.addEventListener('click', () => {
   if (currentValue !== '' && previousValue !== '' & operator !== '' ) {
     calculate();
   }
 });
 
 clearButton.addEventListener('click', handleClear);
-deleteButton.addEventListener('click', handleDelete,);
+deleteButton.addEventListener('click', handleDelete);
 decimalButton.addEventListener('click', handleDecimal);
 percentageButton.addEventListener('click', handlePercentage);
 
@@ -47,11 +51,12 @@ window.addEventListener('keydown', handleKeyboardInput);
 
 //Input numbers onto the screen element
 function handleNumber(e) {
-    if (currentValue.length < 8) {
-        let number = e.target.textContent;
-        currentValue += number;
-        currentScreen.textContent = currentValue;
-    }
+  if (currentValue === '0') currentValue = '';
+  if (currentValue.length < 9) {
+      currentValue += e;
+      currentScreen.textContent = currentValue;
+      buttonClickSound.play();
+  }
 }
 
 //Keyboard Input
@@ -61,6 +66,9 @@ function handleKeyboardInput(e) {
   }
   if (e.key === 'Escape') {
     handleClear();
+  }
+  if (e.key === '.') {
+    handleDecimal();
   }
   if ((e.key === '=' || e.key === 'Enter') && (currentValue !== '' && previousValue !== '' & operator !== '' )) {
     calculate();
@@ -72,15 +80,14 @@ function handleKeyboardInput(e) {
     }
     handleOperator(convertedKey);
   }
-  if (currentValue.length < 8) {
+  if (currentValue.length < 9) {
     if (e.key >= 0 && e.key <=9) {
-      currentValue += e.key;
-      currentScreen.textContent = currentValue;
+      handleNumber(e.key);
     }
   }
 }
 
-//Keyboard Input converter
+//Keyboard Input converter to make sure symbols can be read by functions
 function keyConverter(keyInput) {
   if (keyInput === '+') return '+';
   if (keyInput === '-') return '-';
@@ -88,22 +95,24 @@ function keyConverter(keyInput) {
   if (keyInput === '/' ) return '÷';
 }
 
-//Operators function
+//Handles selection of operator and updates previous and current values
 function handleOperator(e) {
   operator = e;
   previousValue = currentValue;
   currentValue = '';
   previousScreen.textContent = `${previousValue} ${operator}`;
   currentScreen.textContent = currentValue;
+  buttonClickSound.play();
 }
 
 //Clears the currentScreen, previousScreen, and the operator
 function handleClear() {
-  currentValue = '';
+  currentValue = '0';
   previousValue = '';
   operator = '';
   previousScreen.textContent = previousValue;
-  currentScreen.textContent = '0';
+  currentScreen.textContent = currentValue;
+  buttonClickSound.play();
 }
 
 //Clears a single digit on the currentScreen
@@ -111,12 +120,17 @@ function handleDelete() {
   let slicedValue = currentValue.slice(0, -1);
   currentValue = slicedValue;
   currentScreen.textContent = currentValue;
+  buttonClickSound.play();
 }
 
 //Divides currentValue by 100 to show 10%
 function handlePercentage() {
-  currentValue /= 100;
-  currentScreen.textContent = currentValue;
+  if (currentValue.length < 9 ) {
+    let percentageValueString = (currentValue /= 100).toString();
+    currentScreen.textContent = currentValue;
+    currentValue = percentageValueString;
+    buttonClickSound.play();
+  }
 }
 
 //Calculate the expression according to the operator used
@@ -124,8 +138,9 @@ function calculate() {
   let previousValueFirst = previousValue; 
   previousValue = Number(previousValue);
   currentValue = Number(currentValue);
+  buttonClickSound.play();
 
-  //switch function to check current operator
+  //Check current operator and apply the operation accordingly
   switch (operator) {
     case '+':
       (previousValue += currentValue);
@@ -157,15 +172,16 @@ function calculate() {
     operator = '';
 }
 
-//Rounds calculated value
+//Rounds calculated value 
 function rounding(num) {
   return Math.round(num * 1000) / 1000;
 }
 
-//Add decimal to currentValue
+//Adds decimal to currentValue
 function handleDecimal() {
-  if (!currentValue.includes('.')) {
+  if (!currentValue.includes('.') && currentValue.length < 8) {
     currentValue += '.';
     currentScreen.textContent = currentValue;
+    buttonClickSound.play();
   }
 }
